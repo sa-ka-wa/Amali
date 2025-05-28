@@ -8,11 +8,11 @@ Base = declarative_base()
 class Goal(Base):
     __tablename__ = 'goals'
     
-    id = column(Integer, primary_key=True, index=True)
+    id = column(Integer, primary_key=True, index=True, nullable=False)
     user_id = column(Integer, index=True)
     goal_type = column(String, index=True)  # e.g., 'weight_loss', 'muscle_gain'
-    target_value = column(Integer)  # e.g., target weight in kg
-    current_value = column(Integer)  # e.g., current weight in kg
+    target_value = column(Integer,nullable=False)  # e.g., target weight in kg
+    current_value = column(Integer,nullable=False)  # e.g., current weight in kg
     start_date = column(String, default=datetime.utcnow().isoformat())
     end_date = column(String, nullable=True)  # Optional end date for the goal
 

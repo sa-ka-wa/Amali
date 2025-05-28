@@ -1,2 +1,39 @@
-env
-venv
+# === Python ===
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.pdb
+
+# === Virtual environments ===
+env/
+venv/
+ENV/
+.venv/
+
+# === Environment Variables ===
+.env
+*.env
+
+# === Pipenv files (optional) ===
+Pipfile.lock
+
+# === PostgreSQL ===
+*.sql           # database dumps
+*.dump          # binary dumps
+*.pgsql         # optional extensions
+
+# === System Files ===
+.DS_Store
+Thumbs.db
+
+# === Logs & temp files ===
+*.log
+*.tmp
+*.bak
+
+# === Other optional folders ===
+node_modules/
+dist/
+build/
