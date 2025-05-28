@@ -1,6 +1,6 @@
-from sqlalchemy import column, Integer, String, create_engine
-from sqlalchemy.ext.declarative import declarative_base, relationship
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy import Column, Integer, String, create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker, relationship
 from datetime import datetime
 
 Base = declarative_base()
@@ -8,13 +8,13 @@ Base = declarative_base()
 class Goal(Base):
     __tablename__ = 'goals'
     
-    id = column(Integer, primary_key=True, index=True, nullable=False)
-    user_id = column(Integer, index=True)
-    goal_type = column(String, index=True)  # e.g., 'weight_loss', 'muscle_gain'
-    target_value = column(Integer,nullable=False)  # e.g., target weight in kg
-    current_value = column(Integer,nullable=False)  # e.g., current weight in kg
-    start_date = column(String, default=datetime.utcnow().isoformat())
-    end_date = column(String, nullable=True)  # Optional end date for the goal
+    id = Column(Integer, primary_key=True, index=True, nullable=False)
+    user_id = Column(Integer, index=True)
+    goal_type = Column(String, index=True)  # e.g., 'weight_loss', 'muscle_gain'
+    target_value = Column(Integer,nullable=False)  # e.g., target weight in kg
+    current_value = Column(Integer,nullable=False)  # e.g., current weight in kg
+    start_date = Column(String, default=datetime.utcnow().isoformat())
+    end_date = Column(String, nullable=True)  # Optional end date for the goal
 
     user = relationship("User", back_populates="goals")
 
