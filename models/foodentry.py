@@ -1,15 +1,16 @@
-from sqlalchemy import Column, Integer, String, create_engine
+from sqlalchemy import Column, Integer, String, create_engine, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
 from datetime import datetime
 
-Base = declarative_base()
+from .base import Base
+
 
 class FoodEntry(Base):
     __tablename__ = 'food_entries'
     
     id = Column(Integer, primary_key=True, index=True,nullable=False)
-    user_id = Column(Integer, index=True)
+    user_id = Column(Integer, ForeignKey('users.id'), index=True, nullable=False)
     food_name = Column(String, index=True)
     calories = Column(Integer)
     protein = Column(Integer)
