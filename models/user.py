@@ -7,7 +7,7 @@ Base = declarative_base()
 class User(Base):
     __tablename__ = 'users'
     
-    id = column(Integer, primary_key=True, index=True)
+    id = column(Integer, primary_key=True, index=True, nullable=False)
     name = column(String, index=True)
     email = column(String, unique=True, index=True)
     created_at = column(String, default=datetime.utcnow().isoformat())
