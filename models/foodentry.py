@@ -9,6 +9,7 @@ from .base import Base
 class FoodEntry(Base):
     __tablename__ = 'food_entries'
     
+
     id = Column(Integer, primary_key=True, index=True,nullable=False)
     user_id = Column(Integer, ForeignKey('users.id'), index=True, nullable=False)
     food_name = Column(String, index=True)
@@ -17,6 +18,7 @@ class FoodEntry(Base):
     carbs = Column(Integer)
     fats = Column(Integer)
     created_at = Column(String, default=datetime.utcnow().isoformat())
+
 
     user = relationship("User", back_populates="food_entries")
     
