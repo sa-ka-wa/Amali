@@ -22,7 +22,9 @@ class Goal(Base):
     user = relationship("User", back_populates="goals")
 
     def __repr__(self):
-        return f"<Goal(id={self.id}, user_id={self.user_id}, goal_type='{self.goal_type}', target_value={self.target_value})>"
+        return (f"<Goal(id={self.id}, user_id={self.user_id}, user_name={self.user.name if self.user else 'N/A'}, "
+            f"goal_type='{self.goal_type}', target_value={self.target_value}, current_value={self.current_value}, "
+            f"start_date='{self.start_date}', end_date='{self.end_date}')>")
     
 # CREATE
 def create_goal(session, user_id, goal_type, target_value, current_value, start_date=None, end_date=None):

@@ -27,6 +27,8 @@ def create_user(session, name, email):
     session.refresh(user)
     return user
 # READ
+def get_users(session):
+    return session.query(User).all()
 def get_user_by_id(session, user_id):
     return session.query(User).filter(User.id == user_id).first()
 def get_user_by_email(session, email):
