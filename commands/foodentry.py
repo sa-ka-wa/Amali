@@ -26,9 +26,14 @@ def list():
         typer.echo(f"No food entries found for user {user_id}")
         return
     
-    typer.echo(f"Food entries for user {user_id}:")
+    typer.echo(typer.style(f"Food entries for user {user_id}:", fg=typer.colors.GREEN, bold=True))
+
     for entry in entries:
-        typer.echo(f"- {entry.food} ({entry.calories} kcal) [ID: {entry.id}]")
+     typer.echo(
+        f"- {typer.style(entry.food_name, fg=typer.colors.CYAN)} "
+        f"({typer.style(str(entry.calories), fg=typer.colors.YELLOW)} kcal) "
+        f"[ID: {typer.style(str(entry.id), fg=typer.colors.MAGENTA)}]"
+    )
 
 @foodentry_app.command()
 def add(

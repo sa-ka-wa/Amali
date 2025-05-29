@@ -29,8 +29,10 @@ def main_menu():
         print("4. Delete User")
         print("5. Add Food Entry")
         print("6. List Food Entries")
-        print("7. Set Goal")
-        print("8. View Goals")
+        print("7. Update Food Entry")
+        print("8. Delete Food Entry")
+        print("9. Set Goal")
+        print("10. View Goals")
         print("Q. Quit\n")
 
         choice = input("👉 Select an option: ").strip().lower()
@@ -60,8 +62,28 @@ def main_menu():
         elif choice == '6':
             run_command('foodentry list')
         elif choice == '7':
-            run_command('goal set')
+            entry_id = input("🆔 Enter Food Entry ID to update: ").strip()
+            food = input("🍱 New food name (blank to skip): ").strip()
+            calories = input("🔥 New calories (blank to skip): ").strip()
+            protein = input("💪 New protein (blank to skip): ").strip()
+            carbs = input("🍞 New carbs (blank to skip): ").strip()
+            fats = input("🥑 New fats (blank to skip): ").strip()
+
+            command = f"foodentry update {entry_id}"
+            if food: command += f" --food-name '{food}'"
+            if calories: command += f" --calories {calories}"
+            if protein: command += f" --protein {protein}"
+            if carbs: command += f" --carbs {carbs}"
+            if fats: command += f" --fats {fats}"
+            run_command(command)
+
         elif choice == '8':
+            entry_id = input("🆔 Enter Food Entry ID to delete: ").strip()
+            run_command(f"foodentry delete {entry_id}")
+
+        elif choice == '9':
+            run_command('goal set')
+        elif choice == '10':
             run_command('goal list')
         elif choice == 'q':
             print("\n👋 Goodbye!")
