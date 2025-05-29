@@ -19,7 +19,7 @@
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy.exc import declarative_base
+from sqlalchemy.ext.declarative import declarative_base
 from db.config import DB_CONFIG
 from db.config import DATABASE_URL
 

@@ -1,16 +1,17 @@
-from sqlalchemy import column, Integer, String, create_engine
-from sqlalchemy.ext.declarative import declarative_base, relationship
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy import Column, Integer, String, create_engine, ForeignKey
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker, relationship
 from datetime import datetime
 
-Base = declarative_base()
+from .base import Base
+
 class User(Base):
     __tablename__ = 'users'
     
-    id = column(Integer, primary_key=True, index=True, nullable=False)
-    name = column(String, index=True)
-    email = column(String, unique=True, index=True)
-    created_at = column(String, default=datetime.utcnow().isoformat())
+    id = Column(Integer, primary_key=True, index=True, nullable=False)
+    name = Column(String, index=True)
+    email = Column(String, unique=True, index=True)
+    created_at = Column(String, default=datetime.utcnow().isoformat())
 
     food_entries = relationship("FoodEntry", back_populates="user")
     goals = relationship("Goal", back_populates="user")

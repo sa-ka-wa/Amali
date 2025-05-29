@@ -1,21 +1,24 @@
-from sqlalchemy import column, Integer, String, create_engine
-from sqlalchemy.ext.declarative import declarative_base, relationship
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy import Column, Integer, String, create_engine, ForeignKey
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker, relationship
 from datetime import datetime
 
-Base = declarative_base()
+from .base import Base
+
 
 class FoodEntry(Base):
     __tablename__ = 'food_entries'
     
-    id = column(Integer, primary_key=True, index=True,nullable=False)
-    user_id = column(Integer, index=True)
-    food_name = column(String, index=True)
-    calories = column(Integer,nullable=False)
-    protein = column(Integer,nullable=False)
-    carbs = column(Integer,nullable=False)
-    fats = column(Integer,nullable=False)
-    created_at = column(String, default=datetime.utcnow().isoformat())
+
+    id = Column(Integer, primary_key=True, index=True,nullable=False)
+    user_id = Column(Integer, ForeignKey('users.id'), index=True, nullable=False)
+    food_name = Column(String, index=True)
+    calories = Column(Integer)
+    protein = Column(Integer)
+    carbs = Column(Integer)
+    fats = Column(Integer)
+    created_at = Column(String, default=datetime.utcnow().isoformat())
+
 
     user = relationship("User", back_populates="food_entries")
     
