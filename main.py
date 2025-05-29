@@ -31,8 +31,10 @@ def main_menu():
         print("6. List Food Entries")
         print("7. Update Food Entry")
         print("8. Delete Food Entry")
-        print("9. Set Goal")
-        print("10. View Goals")
+        print("9. Add Goal")
+        print("10. List Goals")
+        print("11. Update Goal")
+        print("12. Delete Goal")
         print("Q. Quit\n")
 
         choice = input("👉 Select an option: ").strip().lower()
@@ -82,9 +84,29 @@ def main_menu():
             run_command(f"foodentry delete {entry_id}")
 
         elif choice == '9':
-            run_command('goal set')
+            run_command('goal add')
         elif choice == '10':
             run_command('goal list')
+        elif choice == '11':
+            goal_id = input("🆔 Enter Goal ID to update: ").strip()
+            goal_type = input("🎯 New goal type (blank to skip): ").strip()
+            target_value = input("🎯 New target value (blank to skip): ").strip()
+            current_value = input("📊 New current value (blank to skip): ").strip()
+            start_date = input("📅 New start date (YYYY-MM-DD) (blank to skip): ").strip()
+            end_date = input("📅 New end date (YYYY-MM-DD) (blank to skip): ").strip()
+
+            command = f"goal update {goal_id}"
+            if goal_type: command += f" --goal-type '{goal_type}'"
+            if target_value: command += f" --target-value {target_value}"
+            if current_value: command += f" --current-value {current_value}"
+            if start_date: command += f" --start-date '{start_date}'"
+            if end_date: command += f" --end-date '{end_date}'"
+            run_command(command)
+
+        elif choice == '12':
+            goal_id = input("🆔 Enter Goal ID to delete: ").strip()
+            run_command(f"goal delete {goal_id}")
+
         elif choice == 'q':
             print("\n👋 Goodbye!")
             break
