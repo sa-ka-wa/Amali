@@ -35,6 +35,11 @@ def main_menu():
         print("10. List Goals")
         print("11. Update Goal")
         print("12. Delete Goal")
+        print("13. Add Meal Plan")
+        print("14. List Meal Plans")
+        print("15. Update Meal Plan")
+        print("16. Delete Meal Plan")
+
         print("Q. Quit\n")
 
         choice = input("👉 Select an option: ").strip().lower()
@@ -107,11 +112,34 @@ def main_menu():
             goal_id = input("🆔 Enter Goal ID to delete: ").strip()
             run_command(f"goal delete {goal_id}")
 
+        elif choice == '13':
+            run_command('mealplan add')
+        elif choice == '14':
+            run_command('mealplan list')
+        elif choice == '15':
+            mealplan_id = input("🆔 Enter Meal Plan ID to update: ").strip()
+            name = input("📛 New plan name (blank to skip): ").strip()
+            description = input("📝 New description (blank to skip): ").strip()
+            date = input("📅 New date (YYYY-MM-DD or leave blank for today): ").strip()
+
+            command = f"mealplan update {mealplan_id}"
+            if name: command += f" --name '{name}'"
+            if description: command += f" --description '{description}'"
+            if date: command += f" --date '{date}'"
+            run_command(command)
+
+        elif choice == '16':
+            mealplan_id = input("🆔 Enter Meal Plan ID to delete: ").strip()
+            run_command(f"mealplan delete {mealplan_id}")
+
+
         elif choice == 'q':
             print("\n👋 Goodbye!")
             break
         else:
             input("❌ Invalid choice. Press Enter to continue...")
+
+        
 
 if __name__ == '__main__':
     main_menu()

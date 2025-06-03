@@ -15,6 +15,8 @@ class User(Base):
 
     food_entries = relationship("FoodEntry", back_populates="user")
     goals = relationship("Goal", back_populates="user")
+    meal_plans = relationship("MealPlan", back_populates="user", cascade="all, delete-orphan")
+
 
     def __repr__(self):
         return f"<User(id={self.id}, name='{self.name}', email='{self.email}')>"

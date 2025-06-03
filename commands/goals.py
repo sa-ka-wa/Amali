@@ -98,4 +98,4 @@ def delete_goal_cmd(goal_id: int = typer.Option(..., prompt="Enter Goal ID to de
         session.close()
 
 if __name__ == "__main__":
-    goal_app
+    goal_app()
