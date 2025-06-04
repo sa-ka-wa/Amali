@@ -1,31 +1,20 @@
 import typer
-from models.goal import create_goal, get_goals_by_user
-from db.database import SessionLocal
+from commands.user import user_app
+from commands.goals import goal_app
+from commands.app import app_app
+from commands.foodentry import foodentry_app
+from commands.meal_plan import meal_plan_app
+
+print("✅ cli.py running with args:", __import__('sys').argv)
+
 
 app = typer.Typer()
 
-@app.command()
-def add(
-    user_id: int, 
-    goal_type: str, 
-    target_value: int = 0,      # optional, defaults to 0
-    current_value: int = 0      # optional, defaults to 0
-):
-    session = SessionLocal()
-    goal = create_goal(session, user_id, goal_type, target_value, current_value)
-    typer.echo(f"Goal added: {goal}")
-    session.close()
-
-@app.command()
-def list(user_id: int):
-    session = SessionLocal()
-    goals = get_goals_by_user(session, user_id)
-    if not goals:
-        typer.echo("No goals found.")
-    else:
-        for goal in goals:
-            typer.echo(f"- {goal}")
-    session.close()
+app.add_typer(user_app, name="user")
+app.add_typer(app_app, name="app")
+app.add_typer(foodentry_app, name="foodentry")
+app.add_typer(goal_app, name="goal")
+app.add_typer(meal_plan_app, name="mealplan")
 
 if __name__ == "__main__":
-    app()
+   app()
